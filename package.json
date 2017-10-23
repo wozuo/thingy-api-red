@@ -1,0 +1,24 @@
+{
+  "name": "thingy-api",
+  "version": "1.0.0",
+  "description": "Thingy RESTful API for ASE Project 2017",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wozuo/thingy-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wozuo/thingy-api/issues"
+  },
+  "homepage": "https://github.com/wozuo/thingy-api#readme",
+  "dependencies": {
+    "hapi": "^16.6.2",
+    "hapi-swagger": "^8.0.0",
+    "joi": "^13.0.1"
+  }
+}
