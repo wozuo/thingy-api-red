@@ -6,7 +6,6 @@ function UserController(){};
 UserController.prototype = (function() {
   return {
     findByID: function findByID(request, reply) {
-      console.log('Return user');
       reply('TODO: Return user').code(200);
     },
     insert: function insert(request, reply) {
