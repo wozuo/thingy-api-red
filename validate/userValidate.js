@@ -8,7 +8,7 @@ function UserValidate(){};
 UserValidate.prototype = (function() {
   return {
     findByID: {
-      path: (function path() {
+      params: (function path() {
         var userSchema = new UserModel().schema;
         return {
           user_id: userSchema.userId.required()
@@ -16,7 +16,7 @@ UserValidate.prototype = (function() {
       })()
     },
     insert: {
-      path: (function path() {
+      query: (function path() {
         var userSchema = new UserModel().schema;
         return {
           description: userSchema.description.required()
@@ -24,7 +24,7 @@ UserValidate.prototype = (function() {
       })()
     },
     update: {
-      path: (function path() {
+      query: (function path() {
         var userSchema = new UserModel().schema;
         return {
           description: userSchema.description.required()
@@ -32,7 +32,7 @@ UserValidate.prototype = (function() {
       })()
     },
     delete: {
-      path: (function path() {
+      params: (function path() {
         var userSchema = new UserModel().schema;
         return {
           user_id: userSchema.userId.required()

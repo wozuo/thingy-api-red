@@ -9,6 +9,7 @@ module.exports = function() {
       method: 'GET',
       path: '/users/{user_id}',
       config: {
+        tags: ['api'],
         handler: userController.findByID,
         validate: userValidate.findByID
       }
@@ -17,6 +18,7 @@ module.exports = function() {
       method: 'POST',
       path: '/users',
       config: {
+        tags: ['api'],
         handler: userController.insert,
         validate: userValidate.insert
       }
@@ -25,6 +27,7 @@ module.exports = function() {
       method: 'PUT',
       path: '/users/{user_id}',
       config: {
+        tags: ['api'],
         handler: userController.update,
         validate: userValidate.update
       }
@@ -33,6 +36,7 @@ module.exports = function() {
       method: 'DELETE',
       path: '/users/{user_id}',
       config: {
+        tags: ['api'],
         handler: userController.delete,
         validate: userValidate.delete
       }
