@@ -22,6 +22,7 @@
     "hapi-swagger": "^8.0.0",
     "inert": "^4.2.1",
     "joi": "^13.0.1",
+    "mysql": "^2.15.0",
     "underscore": "^1.8.3",
     "vision": "^4.1.1"
   }

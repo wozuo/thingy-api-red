@@ -5,6 +5,7 @@ const routes = require('./routes');
 const hapiSwagger = require('hapi-swagger');
 const inert = require('inert');
 const vision = require('vision');
+const db = require('./db');
 
 const server = new hapi.Server();
 
@@ -12,7 +13,6 @@ server.connection({
     host: '0.0.0.0',
     port: process.env.PORT || 3000
 });
-
 
 const swaggerOptions = {
     info: {
@@ -42,9 +42,16 @@ for (var route in routes) {
   server.route(routes[route]);
 }
 
-server.start((error) => {
+db.connect(function(error) {
   if (error) {
     throw error;
+  } else {
+    console.log('Connected to database');
+    server.start((error) => {
+      if (error) {
+        throw error;
+      }
+      console.log('Server running at:', server.info.uri);
+    })
   }
-  console.log('Server running at:', server.info.uri);
 })
