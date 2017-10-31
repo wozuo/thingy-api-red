@@ -7,12 +7,12 @@ const inert = require('inert');
 const vision = require('vision');
 
 const server = new hapi.Server();
-/*
+
 server.connection({
-    host: '127.0.0.1',
-    port: 5000
+    host: '0.0.0.0',
+    port: process.env.PORT || 3000
 });
-*/
+
 
 const swaggerOptions = {
     info: {
