@@ -7,7 +7,7 @@ function UserController(){};
 UserController.prototype = (function() {
   return {
     getUser: function getUser(request, reply) {
-      db.get().query('SELECT user_id, username FROM users WHERE id = "' + request.params.userId + '"', function (error, results) {
+      db.get().query('SELECT user_id, username FROM users WHERE id = "' + request.params.user_id + '"', function (error, results) {
         if (error) {
           reply('User not found.').code(404);
         }
