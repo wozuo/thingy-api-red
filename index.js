@@ -1,5 +1,7 @@
 'use strict';
 
+require('dotenv').config();
+
 const hapi = require('hapi');
 const routes = require('./routes');
 const hapiSwagger = require('hapi-swagger');
