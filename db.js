@@ -8,20 +8,14 @@ exports.connect = function(done) {
   pool = mysql.createPool({
     connectionLimit: 8,
     host: process.env.DB_HOST,
-    user: process.env.DB_DATABASE,
-    password: process.env.DB_USERNAME,
-    database: process.env.DB_PASSWORD
+    user: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE
   });
   done();
 }
 
 exports.get = function() {
-  console.log({
-    host            : process.env.DB_HOST,
-    user            : process.env.DB_DATABASE,
-    password        : process.env.DB_USERNAME,
-    database        : process.env.DB_PASSWORD
- })
   return pool;
 }
 

@@ -15,8 +15,7 @@ UserController.prototype = (function() {
           if (results.length == 1) {
             var result = {
               id: results[0].user_id,
-              username: results[0].username,
-              url: server.info.uri + '/users/' + results[0].user_id
+              username: results[0].username
             };
             reply(result).code(200);
           } else {

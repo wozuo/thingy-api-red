@@ -9,13 +9,4 @@ function UserModel() {
 	};
 };
 
-function UserResponseModel() {
-	this.schema = {
-		userId: joi.number().integer(),
-		username: joi.string().max(20),
-		url: joi.string()
-	};
-};
-
 module.exports = UserModel;
-module.exports = UserResponseModel;

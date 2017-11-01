@@ -2,7 +2,7 @@
 
 var userController = require('../controllers/userController');
 var userValidate = require('../validate/userValidate');
-var UserResponseModel = require('../models/userModel');
+var UserModel = require('../models/userModel');
 var joi = require('joi');
 
 module.exports = function() {
@@ -17,7 +17,7 @@ module.exports = function() {
         plugins: {'hapi-swagger': {responses: {
           200: {
             description: 'Success',
-            schema: joi.array().items(new UserResponseModel().schema),
+            schema: joi.array().items(new UserModel().schema),
           },
           404: {description: 'User not found'}
         }}}
