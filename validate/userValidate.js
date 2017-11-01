@@ -7,31 +7,31 @@ var UserModel = require('../models/userModel');
 function UserValidate(){};
 UserValidate.prototype = (function() {
   return {
-    findByID: {
+    getUser: {
       params: (function path() {
         var userSchema = new UserModel().schema;
         return {
-          user_id: userSchema.userId.required()
+          user_id: userSchema.userId.required().positive()
         };
       })()
     },
-    insert: {
+    createUser: {
       query: (function path() {
         var userSchema = new UserModel().schema;
         return {
-          description: userSchema.description.required()
+          username: userSchema.username.required()
         };
       })()
     },
-    update: {
+    editUser: {
       query: (function path() {
         var userSchema = new UserModel().schema;
         return {
-          description: userSchema.description.required()
+          username: userSchema.username.required()
         };
       })()
     },
-    delete: {
+    deleteUser: {
       params: (function path() {
         var userSchema = new UserModel().schema;
         return {

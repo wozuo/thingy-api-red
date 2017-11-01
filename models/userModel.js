@@ -2,10 +2,10 @@
 
 var joi = require('joi');
 
-function UserModel(){
+function UserModel() {
 	this.schema = {
 		userId: joi.number().integer(),
-		description: joi.string().max(255)
+		username: joi.string().max(20)
 	};
 };
 

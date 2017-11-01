@@ -14,6 +14,10 @@ server.connection({
     port: process.env.PORT || 3000
 });
 
+for (var route in routes) {
+  server.route(routes[route]);
+}
+
 const swaggerOptions = {
     info: {
         'title': 'Thingy API',
@@ -38,10 +42,6 @@ server.register([
     }
 ]);
 
-for (var route in routes) {
-  server.route(routes[route]);
-}
-
 db.connect(function(error) {
   if (error) {
     throw error;
@@ -54,4 +54,4 @@ db.connect(function(error) {
       console.log('Server running at:', server.info.uri);
     })
   }
-})
+});

@@ -2,6 +2,8 @@
 
 var userController = require('../controllers/userController');
 var userValidate = require('../validate/userValidate');
+var UserModel = require('../models/userModel');
+var joi = require('joi');
 
 module.exports = function() {
   return [
@@ -10,8 +12,15 @@ module.exports = function() {
       path: '/users/{user_id}',
       config: {
         tags: ['api'],
-        handler: userController.findByID,
-        validate: userValidate.findByID
+        handler: userController.getUser,
+        validate: userValidate.getUser,
+        plugins: {'hapi-swagger': {responses: {
+          200: {
+            description: 'Success',
+            schema: joi.array().items(new UserModel().schema)
+          },
+          404: {description: 'User not found'}
+        }}}
       }
     },
     {
@@ -19,8 +28,8 @@ module.exports = function() {
       path: '/users',
       config: {
         tags: ['api'],
-        handler: userController.insert,
-        validate: userValidate.insert
+        handler: userController.createUser,
+        validate: userValidate.createUser
       }
     },
     {
@@ -28,8 +37,8 @@ module.exports = function() {
       path: '/users/{user_id}',
       config: {
         tags: ['api'],
-        handler: userController.update,
-        validate: userValidate.update
+        handler: userController.editUser,
+        validate: userValidate.editUser
       }
     },
     {
@@ -37,8 +46,8 @@ module.exports = function() {
       path: '/users/{user_id}',
       config: {
         tags: ['api'],
-        handler: userController.delete,
-        validate: userValidate.delete
+        handler: userController.deleteUser,
+        validate: userValidate.deleteUser
       }
     }
   ];
