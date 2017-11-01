@@ -47,6 +47,7 @@ db.connect(function(error) {
     throw error;
   } else {
     console.log('Connected to database');
+    //db.sample();
     server.start((error) => {
       if (error) {
         throw error;
