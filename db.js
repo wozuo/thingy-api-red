@@ -12,16 +12,16 @@ exports.connect = function(done) {
     password: process.env.DB_USERNAME,
     database: process.env.DB_PASSWORD
   });
+  done();
+}
+
+exports.get = function() {
   console.log({
     host            : process.env.MYSQL_HOST,
     user            : process.env.MYSQL_USER,
     password        : process.env.MYSQL_SECRET,
     database        : process.env.MYSQL_DB
  })
-  done();
-}
-
-exports.get = function() {
   return pool;
 }
 
