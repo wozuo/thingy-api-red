@@ -10,7 +10,7 @@ const db = require('./db');
 const server = new hapi.Server();
 
 server.connection({
-    host: 'localhost',
+    host: '127.0.0.1',
     port: process.env.PORT || 3000
 });
 
