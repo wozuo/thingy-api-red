@@ -1,12 +1,27 @@
 'use strict';
 
 var hapi = require('hapi');
+const db = require('../db');
 
 function UserController(){};
 UserController.prototype = (function() {
   return {
     getUser: function getUser(request, reply) {
-      reply('TODO: Return user').code(200);
+      db.get().query('SELECT user_id, username FROM users WHERE id = "' + request.params.userId + '"', function (error, results) {
+        if (error) {
+          reply('User not found.').code(404);
+        }
+        if (results.length == 1) {
+          var result = {
+            id: results[0].user_id,
+            username: results[0].username,
+            url: server.info.uri + '/users/' + results[0].user_id
+          };
+          reply(result).code(200);
+        } else {
+          reply('User not found').code(404);
+        }
+      })
     },
     createUser: function createUser(request, reply) {
       reply('TODO: Insert user').code(200);
