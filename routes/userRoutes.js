@@ -17,9 +17,11 @@ module.exports = function() {
         plugins: {'hapi-swagger': {responses: {
           200: {
             description: 'Success',
-            schema: joi.array().items(new UserModel().schema),
+            schema: joi.array().items(new UserModel().schema)
           },
-          404: {description: 'User not found'}
+          404: {
+            description: 'User not found'
+          }
         }}}
       }
     },
@@ -29,7 +31,16 @@ module.exports = function() {
       config: {
         tags: ['api'],
         handler: userController.createUser,
-        validate: userValidate.createUser
+        validate: userValidate.createUser,
+        plugins: {'hapi-swagger': {responses: {
+          201: {
+            description: 'Success',
+            schema: joi.array().items(new UserModel().schema)
+          },
+          404: {
+            description: 'User not found'
+          }
+        }}}
       }
     },
     {
@@ -38,7 +49,16 @@ module.exports = function() {
       config: {
         tags: ['api'],
         handler: userController.editUser,
-        validate: userValidate.editUser
+        validate: userValidate.editUser,
+        plugins: {'hapi-swagger': {responses: {
+          200: {
+            description: 'Success',
+            schema: joi.array().items(new UserModel().schema)
+          },
+          404: {
+            description: 'User not found'
+          }
+        }}}
       }
     },
     {
@@ -47,7 +67,15 @@ module.exports = function() {
       config: {
         tags: ['api'],
         handler: userController.deleteUser,
-        validate: userValidate.deleteUser
+        validate: userValidate.deleteUser,
+        plugins: {'hapi-swagger': {responses: {
+          204: {
+            description: 'User deleted'
+          },
+          404: {
+            description: 'User not found'
+          }
+        }}}
       }
     }
   ];

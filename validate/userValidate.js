@@ -16,7 +16,7 @@ UserValidate.prototype = (function() {
       })()
     },
     createUser: {
-      query: (function path() {
+      payload: (function path() {
         var userSchema = new UserModel().schema;
         return {
           username: userSchema.username.required()
@@ -24,7 +24,13 @@ UserValidate.prototype = (function() {
       })()
     },
     editUser: {
-      query: (function path() {
+      params: (function path() {
+        var userSchema = new UserModel().schema;
+        return {
+          user_id: userSchema.userId.required().positive()
+        };
+      })(),
+      payload: (function path() {
         var userSchema = new UserModel().schema;
         return {
           username: userSchema.username.required()
