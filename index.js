@@ -31,8 +31,13 @@ const swaggerOptions = {
         {
             description: 'User operations',
             name: 'users'
+        },
+        {
+          description: 'Recommendations',
+          name: 'recommendations'
         }
-    ]
+    ],
+    grouping: 'tags'
 }
 
 server.register([

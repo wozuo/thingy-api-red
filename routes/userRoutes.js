@@ -11,7 +11,7 @@ module.exports = function() {
       method: 'GET',
       path: '/users/{user_id}',
       config: {
-        tags: ['api'],
+        tags: ['api', 'users'],
         handler: userController.getUser,
         validate: userValidate.getUser,
         plugins: {'hapi-swagger': {responses: {
@@ -29,7 +29,7 @@ module.exports = function() {
       method: 'POST',
       path: '/users',
       config: {
-        tags: ['api'],
+        tags: ['api', 'users'],
         handler: userController.createUser,
         validate: userValidate.createUser,
         plugins: {'hapi-swagger': {responses: {
@@ -47,7 +47,7 @@ module.exports = function() {
       method: 'PUT',
       path: '/users/{user_id}',
       config: {
-        tags: ['api'],
+        tags: ['api', 'users'],
         handler: userController.editUser,
         validate: userValidate.editUser,
         plugins: {'hapi-swagger': {responses: {
@@ -65,7 +65,7 @@ module.exports = function() {
       method: 'DELETE',
       path: '/users/{user_id}',
       config: {
-        tags: ['api'],
+        tags: ['api', 'users'],
         handler: userController.deleteUser,
         validate: userValidate.deleteUser,
         plugins: {'hapi-swagger': {responses: {
