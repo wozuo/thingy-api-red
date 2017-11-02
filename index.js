@@ -29,12 +29,16 @@ const swaggerOptions = {
     documentationPath: '/doc',
     tags: [
         {
-            description: 'User operations',
+            description: 'User Endpoints',
             name: 'users'
         },
         {
-          description: 'Recommendations',
+          description: 'Recommendation Endpoints',
           name: 'recommendations'
+        },
+        {
+          description: 'User Clothes Endpoints',
+          name: 'user_clothes'
         }
     ],
     grouping: 'tags'
@@ -54,7 +58,6 @@ db.connect(function(error) {
     throw error;
   } else {
     console.log('Connected to database');
-    //db.sample();
     server.start((error) => {
       if (error) {
         throw error;

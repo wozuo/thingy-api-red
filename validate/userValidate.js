@@ -11,7 +11,7 @@ UserValidate.prototype = (function() {
       params: (function path() {
         var userSchema = new UserModel().schema;
         return {
-          user_id: userSchema.userId.required().positive()
+          user_id: userSchema.userId.required()
         };
       })()
     },
@@ -27,7 +27,7 @@ UserValidate.prototype = (function() {
       params: (function path() {
         var userSchema = new UserModel().schema;
         return {
-          user_id: userSchema.userId.required().positive()
+          user_id: userSchema.userId.required()
         };
       })(),
       payload: (function path() {
