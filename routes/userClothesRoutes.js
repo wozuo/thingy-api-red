@@ -41,6 +41,9 @@ module.exports = function() {
           },
           404: {
             description: 'User or article of clothing not found. Or no article of clothing for user found.'
+          },
+          409: {
+            description: 'Conflict: Article of clothing is already assigned to user.'
           }
         }}}
       }
