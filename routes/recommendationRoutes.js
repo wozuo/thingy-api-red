@@ -12,7 +12,7 @@ module.exports = function() {
       path: '/users/{user_id}/recommendations',
       config: {
         tags: ['api', 'recommendations'],
-        description: 'Get recommendations for a user (TODO)',
+        description: 'Get recommendations for a user',
         handler: recommendationController.getRecom,
         validate: recommendationValidate.getRecom,
         plugins: {'hapi-swagger': {responses: {
