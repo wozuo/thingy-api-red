@@ -21,7 +21,7 @@ module.exports = function() {
             schema: joi.array().items(new RecommendationModel().schema)
           },
           404: {
-            description: 'User not found'
+            description: 'User or thingy data not found'
           }
         }}}
       }
