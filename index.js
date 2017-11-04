@@ -39,6 +39,10 @@ const swaggerOptions = {
         {
           description: 'User Clothes Endpoints',
           name: 'user_clothes'
+        },
+        {
+          description: 'Clothes Endpoints',
+          name: 'clothes'
         }
     ],
     grouping: 'tags'
