@@ -1,0 +1,3 @@
+C:\Users\Mohammad\source\repos\ThingyApiReceiver\ThingyApiReceiver\obj\Debug\ThingyApiReceiver.njsprojResolveAssemblyReference.cache
+C:\Users\Mohammad\source\repos\ThingyApiReceiver\ThingyApiReceiver\obj\Debug\ThingyApiReceiver.njsproj.CoreCompileInputs.cache
+C:\Users\Mohammad\source\repos\ThingyApiReceiver\ThingyApiReceiver\bin\Microsoft.NodejsTools.WebRole.dll
