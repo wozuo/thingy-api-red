@@ -1,27 +1,27 @@
 'use strict';
 
-var userController = require('../controllers/dataController');
+var userController = require('../controllers/userController');
 var userValidate = require('../validate/userValidate');
-var UserModel = require('../models/dataModel');
+var UserModel = require('../models/userModel');
 var joi = require('joi');
 
 module.exports = function() {
   return [
     {
       method: 'GET',
-      path: '/{thingy_id}/sensors/{thingy_sensor}',
+      path: '/users/{user_id}',
       config: {
-        tags: ['api', 'data'],
-        description: 'Get a specific sensor data',
-        handler: dataController.getsensordata,
-        validate: dataValidate.getsensordata,
+        tags: ['api', 'users'],
+        description: 'Get a specific user',
+        handler: userController.getUser,
+        validate: userValidate.getUser,
         plugins: {'hapi-swagger': {responses: {
           200: {
             description: 'Success',
             schema: joi.array().items(new UserModel().schema)
           },
           404: {
-            description: 'data is not avaiable '
+            description: 'User not found'
           }
         }}}
       }
