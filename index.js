@@ -13,7 +13,10 @@ const server = new hapi.Server();
 
 server.connection({
     host: '0.0.0.0',
-    port: process.env.PORT || 3000
+    port: process.env.PORT || 3000,
+	routes: {
+        cors: true
+    }
 });
 
 for (var route in routes) {
@@ -43,6 +46,10 @@ const swaggerOptions = {
         {
           description: 'Clothes Endpoints',
           name: 'clothes'
+        },
+		{
+            description: 'Sensors Endpoints',
+            name: 'Sensors'
         }
     ],
     grouping: 'tags'
