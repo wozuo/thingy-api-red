@@ -23,7 +23,7 @@ server.connection({
 for (var route in routes) {
     server.route(routes[route]);
 }
-
+dsfsdf
 const swaggerOptions = {
     info: {
         'title': 'Thingy API',

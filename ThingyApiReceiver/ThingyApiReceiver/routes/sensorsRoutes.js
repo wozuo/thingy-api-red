@@ -28,7 +28,7 @@ module.exports = function() {
     },
     {
       method: 'POST',
-      path: '/{thingy_Id}/sensors/',
+      path: '/{thingy_Id}/sensors',
       config: {
         tags: ['api', 'sensors'],
         description: 'insert sensors data',
