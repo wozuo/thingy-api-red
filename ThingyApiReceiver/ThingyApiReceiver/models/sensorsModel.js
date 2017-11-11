@@ -3,8 +3,6 @@
 var Joi = require('joi');
 function SensorsModel() {
     this.schema = {
-        sensor_name: Joi.string(),
-        thingy_Id: Joi.string(),
         timestamp: Joi.string(),
         sensors: Joi.object().keys({
         temperature: Joi.number(),

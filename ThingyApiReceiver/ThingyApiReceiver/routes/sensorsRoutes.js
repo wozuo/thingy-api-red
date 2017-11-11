@@ -3,37 +3,61 @@
 var sensorsController = require('../controllers/sensorsController');
 var sensorsValidate = require('../validate/sensorsValidate');
 var sensorsModel = require('../models/sensorsModel');
+var sensorGetDataModel = require('../models/sensorGetDataModel');
 var joi = require('joi');
 
 module.exports = function() {
   return [
     {
       method: 'GET',
-      path: '/{thingy_id}/sensors/{sensor_name}',
+      path: '/sensors/{thingy_id}/yesterdayDiff',
       config: {
         tags: ['api', 'sensors'],
         description: 'Get a specific sensor data',
-        handler: sensorsController.getSensordata,
-        validate: sensorsValidate.getSensor,
+        handler: sensorsController.getYesterdayDiff,
+        validate: sensorsValidate.getYesterdayDiff,
         plugins: {'hapi-swagger': {responses: {
           200: {
             description: 'Success',
-            schema: joi.array().items(new sensorsModel().schema)
+            schema: joi.array().items(new sensorGetDataModel().schema)
           },
           404: {
             description: 'Sensor data  not available'
           }
         }}}
       }
+      },
+    {
+        method: 'GET',
+        path: '/sensors/yesterdayDiff',
+        config: {
+            tags: ['api', 'sensors'],
+            description: 'Get a yesterday sensor data',
+            handler: sensorsController.getSensordata,
+            validate: sensorsValidate.getSensordata,
+            plugins: {
+                'hapi-swagger': {
+                    responses: {
+                        200: {
+                            description: 'Success',
+                            schema: joi.array().items(new sensorGetDataModel().schema)
+                        },
+                        404: {
+                            description: 'Sensor data  not available'
+                        }
+                    }
+                }
+            }
+        }
     },
     {
       method: 'POST',
-      path: '/{thingy_Id}/sensors',
+      path: '/{thingy_id}/sensors/',
       config: {
         tags: ['api', 'sensors'],
         description: 'insert sensors data',
         handler: sensorsController.insertSensorsdata,
-        validate: sensorsValidate.insertSensorsData,
+        validate: sensorsValidate.insertSensorsdata,
         plugins: {'hapi-swagger': {responses: {
           201: {
             description: 'Success',
@@ -53,16 +77,16 @@ module.exports = function() {
             //TODO: get from Server Config by Thingy ID
             var setup = {
                 temperature: {
-                    interval: 1000
+                    interval: 5000
                 },
                 pressure: {
-                    interval: 1000
+                    interval: 5000
                 },
                 humidity: {
-                    interval: 1000
+                    interval: 5000
                 },
                 color: {
-                    interval: 1000
+                    interval: 5000
                 },
                 gas: {
                     mode: 1

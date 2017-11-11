@@ -42,7 +42,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="models\recommendationModel.js" />
-    <Compile Include="models\SensorsValuesModel.js">
+    <Compile Include="models\sensorGetDataModel.js">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="models\userClothesModel.js" />

@@ -3,19 +3,28 @@
 var joi = require('joi');
 
 var SensorsModel = require('../models/sensorsModel');
+var SensorGetDataModel = require('../models/sensorGetDataModel');
 
 function SensorsValidate() { };
 SensorsValidate.prototype = (function () {
     return {
         getSensordata: {
             params: (function path() {
-                var sensorSchema = new SensorsModel().schema;
+                var sensorSchema = new SensorGetDataModel().schema;
                 return {
-                    sensor_name: sensorSchema.sensor_name.required()
+                    thingy_id: sensorSchema.thingy_id.required()
                 };
             })()
         },
-        insertSensorsData: {
+        getYesterdayDiff: {
+            params: (function path() {
+                var sensorSchema = new SensorGetDataModel().schema;
+                return {
+                    thingy_id: sensorSchema.thingy_id.required()
+                };
+            })()
+        },
+        insertSensorsdata: {
             payload: (function path() {
                 var sensorSchema = new SensorsModel().schema;
                 return {
@@ -24,9 +33,9 @@ SensorsValidate.prototype = (function () {
                 };
             })(),
             params: (function path() {
-                var sensorSchema = new SensorsModel().schema;
+                var sensorSchema = new SensorGetDataModel().schema;
                 return {
-                    thingy_Id: sensorSchema.thingy_Id.required()
+                    thingy_id: sensorSchema.thingy_id.required()
                 };
             })()
         }//,

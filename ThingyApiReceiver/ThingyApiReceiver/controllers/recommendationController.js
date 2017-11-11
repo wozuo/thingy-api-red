@@ -13,7 +13,7 @@ RecommendationController.prototype = (function() {
           reply('Internal Server Error:').code(500);
         } else {
           if (results.length == 1) {
-            var currentDate = new Date().toISOString().replace('T', ' ').slice(0, 19);
+              var currentDate = new Date().toISOString().replace('T', ' ').slice(0, 19);
             db.get().query('SELECT temperature, humidity FROM thingy_data WHERE added_time <= "' + currentDate + '" ORDER BY added_time DESC LIMIT 1', function (error, results) {
               if (error) {
                 console.log('Internal Server Error: ' + error)
