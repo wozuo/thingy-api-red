@@ -8,14 +8,15 @@ const hapiSwagger = require('hapi-swagger');
 const inert = require('inert');
 const vision = require('vision');
 const db = require('./db');
+const authBearer = require('hapi-auth-bearer-token');
 
 const server = new hapi.Server();
 
 server.connection({
     host: '0.0.0.0',
     port: process.env.PORT || 3000,
-	routes: {
-        cors: true
+	  routes: {
+      cors: true
     }
 });
 
@@ -47,22 +48,39 @@ const swaggerOptions = {
           description: 'Clothes Endpoints',
           name: 'clothes'
         },
-		{
-            description: 'Sensors Endpoints',
-            name: 'Sensors'
+		    {
+          description: 'Sensors Endpoints',
+          name: 'Sensors'
         }
     ],
     grouping: 'tags'
 }
 
-server.register([
+server.register(
+  [
     inert,
     vision,
     {
-        register: hapiSwagger,
-        options: swaggerOptions
-    }
-]);
+      register: hapiSwagger,
+      options: swaggerOptions
+    },
+    authBearer
+  ],
+  function (error) {
+    server.auth.strategy('simple', 'bearer-access-token', {
+      allowQueryToken: true,
+      validate: async (request, token, h) => {
+
+        // TODO: Validate token
+        const isValid = token === '1234';
+        const credentials = { token };
+        const artifacts = { test: 'info' };
+        return { isValid, credentials, artifacts };
+      }
+    });
+    server.auth.default('simple');
+  }
+);
 
 db.connect(function(error) {
   if (error) {

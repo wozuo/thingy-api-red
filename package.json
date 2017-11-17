@@ -20,6 +20,7 @@
   "dependencies": {
     "dotenv": "^4.0.0",
     "hapi": "^16.6.2",
+    "hapi-auth-bearer-token": "^6.0.1",
     "hapi-swagger": "^8.0.0",
     "inert": "^4.2.1",
     "joi": "^13.0.1",
