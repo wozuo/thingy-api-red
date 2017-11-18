@@ -11,7 +11,7 @@ module.exports = function() {
       method: 'GET',
       path: '/users/{user_id}/recommendations',
       config: {
-        tags: ['api', 'recommendations'],
+        tags: ['api', 'recom'],
         description: 'Get recommendations for a user',
         handler: recommendationController.getRecom,
         validate: recommendationValidate.getRecom,

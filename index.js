@@ -35,7 +35,7 @@ const swaggerOptions = {
         },
         {
           description: 'Recommendation Endpoints',
-          name: 'recommendations'
+          name: 'recom'
         },
         {
           description: 'User Clothes Endpoints',

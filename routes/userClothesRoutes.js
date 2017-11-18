@@ -27,7 +27,7 @@ module.exports = function() {
       }
     },
     {
-      method: 'POST',
+      method: 'PUT',
       path: '/users/{user_id}/clothes/{aoc_id}',
       config: {
         tags: ['api', 'user_clothes'],
@@ -49,7 +49,7 @@ module.exports = function() {
       }
     },
     {
-      method: 'PUT',
+      method: 'POST',
       path: '/users/{user_id}/clothes/{aoc_id}',
       config: {
         tags: ['api', 'user_clothes'],

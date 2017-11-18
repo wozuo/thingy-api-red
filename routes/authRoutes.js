@@ -16,7 +16,7 @@ module.exports = function() {
         handler: authController.register,
         validate: authValidate.register,
         plugins: {'hapi-swagger': {responses: {
-          200: {
+          201: {
             description: 'Success',
             schema: joi.array().items(new AuthModel().schema)
           },
@@ -35,7 +35,7 @@ module.exports = function() {
         handler: authController.login,
         validate: authValidate.login,
         plugins: {'hapi-swagger': {responses: {
-          201: {
+          200: {
             description: 'Success',
             schema: joi.array().items(new AuthModel().schema)
           },
