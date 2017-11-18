@@ -9,6 +9,7 @@ Registering a new user or login with username and password respond with the user
 - All user clothes endpoints
 
 Every request to these endpoints needs to include the following authorization header:
+
 `Authorization: Bearer ACCESS_TOKEN`
 
 ### Example
