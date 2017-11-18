@@ -39,6 +39,9 @@ module.exports = function() {
             description: 'Success',
             schema: joi.array().items(new AuthModel().schema)
           },
+          400: {
+            description: 'Username or password wrong'
+          },
           404: {
             description: 'User not found'
           }
