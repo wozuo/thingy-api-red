@@ -11,6 +11,7 @@ module.exports = function() {
       method: 'GET',
       path: '/users/{user_id}/clothes',
       config: {
+        auth: 'bearer',
         tags: ['api', 'user_clothes'],
         description: 'Get all clothes assigned to user',
         handler: userClothesController.getClothesOfUser,
@@ -30,6 +31,7 @@ module.exports = function() {
       method: 'PUT',
       path: '/users/{user_id}/clothes/{aoc_id}',
       config: {
+        auth: 'bearer',
         tags: ['api', 'user_clothes'],
         description: 'Assign an article of clothing to a user',
         handler: userClothesController.addAOCToUser,
@@ -52,6 +54,7 @@ module.exports = function() {
       method: 'POST',
       path: '/users/{user_id}/clothes/{aoc_id}',
       config: {
+        auth: 'bearer',
         tags: ['api', 'user_clothes'],
         description: 'Update an article of clothing for a user',
         handler: userClothesController.editAOCOfUser,
@@ -71,6 +74,7 @@ module.exports = function() {
       method: 'DELETE',
       path: '/users/{user_id}/clothes/{aoc_id}',
       config: {
+        auth: 'bearer',
         tags: ['api', 'user_clothes'],
         description: 'Delete an article of clothing from a user',
         handler: userClothesController.deleteAOCOfUser,
