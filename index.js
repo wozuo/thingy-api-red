@@ -45,6 +45,10 @@ const swaggerOptions = {
           description: 'Clothes Endpoints',
           name: 'clothes'
         },
+        {
+          description: 'Authentication Endpoints',
+          name: 'auth'
+        },
 		    {
           description: 'Sensors Endpoints',
           name: 'Sensors'
