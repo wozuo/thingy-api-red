@@ -9,7 +9,8 @@ function AuthController(){};
 AuthController.prototype = (function() {
   return {
     register: function register(request, reply) {
-      db.get().query('SELECT user_id FROM users WHERE username = ?', request.payload.username, function (error, results) {
+      const username = request.payload.username.toLowerCase();
+      db.get().query('SELECT user_id FROM users WHERE username = ?', username, function (error, results) {
         if (error) {
           console.log('Internal Server Error: ' + error)
           reply('Internal Server Error:').code(500);
@@ -25,12 +26,12 @@ AuthController.prototype = (function() {
               } else {
                 // Generate access_token
                 var token = randtoken.generate(50);
-                db.get().query('INSERT INTO users VALUES (default,"' + request.payload.username + '","' + hash + '","' + token + '")', function (error, results) {
+                db.get().query('INSERT INTO users VALUES (default,"' + username + '","' + hash + '","' + token + '")', function (error, results) {
                   if (error) {
                     console.log('Internal Server Error: ' + error)
                     reply('Internal Server Error:').code(500);
                   } else {
-                    db.get().query('SELECT user_id, access_token FROM users WHERE username = ?', request.payload.username, function (error, results) {
+                    db.get().query('SELECT user_id, access_token FROM users WHERE username = ?', username, function (error, results) {
                       if (error) {
                         console.log('Internal Server Error: ' + error)
                         reply('Internal Server Error:').code(500);
@@ -51,7 +52,8 @@ AuthController.prototype = (function() {
       })
     },
     login: function login(request, reply) {
-      db.get().query('SELECT user_id, password_hash, access_token FROM users WHERE username = ?', request.payload.username, function (error, results) {
+      const username = request.payload.username.toLowerCase();
+      db.get().query('SELECT user_id, password_hash, access_token FROM users WHERE username = ?', username, function (error, results) {
         if (error) {
           console.log('Internal Server Error: ' + error)
           reply('Internal Server Error:').code(500);

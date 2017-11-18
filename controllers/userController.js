@@ -25,6 +25,7 @@ UserController.prototype = (function() {
       })
     },
     editUser: function editUser(request, reply) {
+      const username = request.payload.username.toLowerCase();
       db.get().query('SELECT user_id, username FROM users WHERE user_id = ?', request.params.user_id, function (error, results) {
         if (error) {
           console.log('User not found. Error: ' + error)
@@ -35,7 +36,7 @@ UserController.prototype = (function() {
               id: results[0].user_id,
               username: results[0].username
             };
-            db.get().query('UPDATE users SET username = "' + request.payload.username + '" WHERE user_id = "' + request.params.user_id + '"', function(error, results) {
+            db.get().query('UPDATE users SET username = "' + username + '" WHERE user_id = "' + request.params.user_id + '"', function(error, results) {
               if (error) {
                 console.log('User not found. Error: ' + error)
                 reply('User not found.').code(404);
