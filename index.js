@@ -9,6 +9,7 @@ const inert = require('inert');
 const vision = require('vision');
 const db = require('./db');
 const authBearer = require('hapi-auth-bearer-token');
+const validateToken = require('./validate/validateToken');
 
 const server = new hapi.Server();
 
@@ -19,10 +20,6 @@ server.connection({
       cors: true
     }
 });
-
-for (var route in routes) {
-  server.route(routes[route]);
-}
 
 const swaggerOptions = {
     info: {
@@ -53,7 +50,16 @@ const swaggerOptions = {
           name: 'Sensors'
         }
     ],
-    grouping: 'tags'
+    grouping: 'tags',
+    securityDefinitions: {
+        Bearer: {
+            type: 'apiKey',
+            name: 'Authorization',
+            in: 'header',
+            'x-keyPrefix': 'Bearer '
+        }
+    },
+    security: [{ Bearer: [] }]
 }
 
 server.register(
@@ -67,18 +73,15 @@ server.register(
     authBearer
   ],
   function (error) {
-    server.auth.strategy('simple', 'bearer-access-token', {
+    server.auth.strategy('bearer', 'bearer-access-token', {
       allowQueryToken: true,
-      validate: async (request, token, h) => {
-
-        // TODO: Validate token
-        const isValid = token === '1234';
-        const credentials = { token };
-        const artifacts = { test: 'info' };
-        return { isValid, credentials, artifacts };
-      }
+      accessTokenName: 'access_token',
+      validateFunc: validateToken.validateFunction
     });
-    server.auth.default('simple');
+    //server.auth.default('bearer');
+    for (var route in routes) {
+      server.route(routes[route]);
+    }
   }
 );
 

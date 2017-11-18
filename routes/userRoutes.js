@@ -11,6 +11,7 @@ module.exports = function() {
       method: 'GET',
       path: '/users/{user_id}',
       config: {
+        auth: 'bearer',
         tags: ['api', 'users'],
         description: 'Get a specific user',
         handler: userController.getUser,
