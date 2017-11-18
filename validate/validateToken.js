@@ -1,13 +1,25 @@
 'use strict';
 
+const db = require('../db');
+
 module.exports = {
   validateFunction: function (token, callback) {
     var request = this;
-    console.log("User ID: " + request.params.user_id);
-    // TODO: Validate token
-    if (token === "1234") {
-      return callback(null, true, { token: token }, { });
-    }
-    return callback(null, false, { token: token }, { });
+    db.get().query('SELECT access_token FROM users WHERE user_id = ?', request.params.user_id, function (error, results) {
+      if (error) {
+        console.log('Internal Server Error: ' + error)
+        return callback(null, false, { token: token }, { });
+      } else {
+        if (results.length == 1) {
+          if (token == results[0].access_token) {
+            return callback(null, true, { token: token }, { });
+          } else {
+            return callback(null, false, { token: token }, { });
+          }
+        } else {
+          return callback(null, false, { token: token }, { });
+        }
+      }
+    })
   }
 }

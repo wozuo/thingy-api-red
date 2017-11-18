@@ -15,14 +15,6 @@ UserValidate.prototype = (function() {
         };
       })()
     },
-    createUser: {
-      payload: (function path() {
-        var userSchema = new UserModel().schema;
-        return {
-          username: userSchema.username.required()
-        };
-      })()
-    },
     editUser: {
       params: (function path() {
         var userSchema = new UserModel().schema;
