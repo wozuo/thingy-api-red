@@ -206,6 +206,38 @@ UserController.prototype = (function () {
                     }
                 });               
             }
+        },
+
+        getForecast: function getForecast(request, reply) {
+            var country = request.params.country;
+            var city = request.params.city;
+            var time = request.params.time;
+            db.get().query("SELECT * FROM thingy_real_data where thingy_id = '" + thingy_id + "' order by td_id desc limit 1 ", function (error, results) {
+                if (error) {
+                    console.log('thingy  data not found. Error: ' + error)
+                    reply('thingy data not found.').code(404);
+                } else {
+                    if (results.length == 1) {
+                        var result = {
+                            td_id: results[0].td_id,
+                            thingy_id: results[0].thingy_id,
+                            temperature: results[0].temperature,
+                            humidity: results[0].humidity,
+                            pressure: results[0].pressure,
+                            eco2: results[0].eco2,
+                            tvoc: results[0].tvoc,
+                            red: results[0].red,
+                            green: results[0].green,
+                            blue: results[0].blue,
+                            clear: results[0].clear,
+                            timestamp: toProperTimestamp(results[0].time_stamp),
+                        };
+                        reply(result).code(200);
+                    } else {
+                        reply('thingy not found').code(404);
+                    }
+                }
+            });
         }
     }
 })();

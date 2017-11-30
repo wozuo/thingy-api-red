@@ -38,6 +38,7 @@
     <Compile Include="controllers\userController.js" />
     <Compile Include="db.js" />
     <Compile Include="models\aocModel.js" />
+    <Compile Include="models\forecastModel.js" />
     <Compile Include="models\sensorsModel.js">
       <SubType>Code</SubType>
     </Compile>
