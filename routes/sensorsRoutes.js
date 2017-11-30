@@ -29,10 +29,10 @@ module.exports = function() {
       },
     {
         method: 'GET',
-        path: '/sensors/yesterdayDiff',
+        path: '/sensors/{thingy_id}',
         config: {
             tags: ['api', 'sensors'],
-            description: 'Get a yesterday sensor data',
+            description: 'Get sensor data',
             handler: sensorsController.getSensordata,
             validate: sensorsValidate.getSensordata,
             plugins: {
