@@ -5,7 +5,7 @@ function forecastModel() {
     this.schema = {
         country: Joi.string(),
         city: Joi.string(),
-        time: Joi.number().integer
+        time: Joi.number()
     };
 };
 
