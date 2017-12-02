@@ -48,7 +48,7 @@ module.exports = function() {
                             schema: joi.array().items(new forecastModel().schema)
                         },
                         404: {
-                            description: 'Forecast data  not available'
+                            description: 'Forecast data not available'
                         }
                     }
                 }
