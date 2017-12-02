@@ -11,7 +11,6 @@ module.exports = function() {
       method: 'GET',
       path: '/users/{user_id}',
       config: {
-        auth: 'bearer',
         tags: ['api', 'users'],
         description: 'Get a specific user',
         handler: userController.getUser,
@@ -29,9 +28,27 @@ module.exports = function() {
     },
     {
       method: 'POST',
+      path: '/users',
+      config: {
+        tags: ['api', 'users'],
+        description: 'Create a user',
+        handler: userController.createUser,
+        validate: userValidate.createUser,
+        plugins: {'hapi-swagger': {responses: {
+          201: {
+            description: 'Success',
+            schema: joi.array().items(new UserModel().schema)
+          },
+          404: {
+            description: 'User not found'
+          }
+        }}}
+      }
+    },
+    {
+      method: 'PUT',
       path: '/users/{user_id}',
       config: {
-        auth: 'bearer',
         tags: ['api', 'users'],
         description: 'Edit user',
         handler: userController.editUser,
@@ -51,7 +68,6 @@ module.exports = function() {
       method: 'DELETE',
       path: '/users/{user_id}',
       config: {
-        auth: 'bearer',
         tags: ['api', 'users'],
         description: 'Delete a user',
         handler: userController.deleteUser,
