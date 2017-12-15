@@ -2,6 +2,44 @@
 
 var hapi = require('hapi');
 const db = require('../db');
+const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
+
+function getTodaysCalendarEvents(access_token) {
+  return new Promise(function(resolve, reject) {
+    var now = new Date();
+    var endOfDay = new Date();
+    endOfDay.setHours(23, 59, 59);
+    var req = new XMLHttpRequest();
+    let url = 'https://www.googleapis.com/calendar/v3/calendars/primary/events?access_token=' + access_token + '&singleEvents=true&timeMin=' + now.toISOString() + '&timeMax=' + endOfDay.toISOString() + '';
+    req.open('GET', url);
+    req.onload = function() {
+      if (req.status == 200 && req.readyState == 4) {
+        var jsonResp = JSON.parse(req.responseText);
+        resolve(jsonResp);
+      } else {
+        reject(Error(req.statusText));
+      }
+    };
+    req.send();
+  });
+}
+
+function getCoordinatesFor(location) {
+  return new Promise(function(resolve, reject) {
+    var req = new XMLHttpRequest();
+    let url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + location + '&key=' + process.env.GOOGLE_MAPS_API_KEY + '';
+    req.open('GET', url);
+    req.onload = function() {
+      if (req.status == 200 && req.readyState == 4) {
+        var jsonResp = JSON.parse(req.responseText);
+        resolve(jsonResp);
+      } else {
+        reject(Error(req.statusText));
+      }
+    };
+    req.send();
+  });
+}
 
 function RecommendationController(){};
 RecommendationController.prototype = (function() {
@@ -57,7 +95,28 @@ RecommendationController.prototype = (function() {
       })
     },
     getForecast: function getForecast(request, reply) {
-      reply("TODO: implement forecast").code(200);
+      getTodaysCalendarEvents(request.params.google_at).then(function(response) {
+        const items = response.items;
+        let coordinatePromises = [];
+        for(var i = 0; i < items.length; i++) {
+          console.log('Item Location: ' + items[i].location);
+          coordinatePromises.push(getCoordinatesFor(items[i].location));
+        }
+        Promise.all(coordinatePromises).then((results) => {
+          let coordinates = [];
+          for(var i = 0; i < results.length; i++) {
+            //console.log('Location: ' + results[i].results[0].geometry.location.lat);
+            var tempCoords = { lat: results[i].results[0].geometry.location.lat, lng: results[i].results[0].geometry.location.lng };
+            coordinates.push(tempCoords);
+          }
+          console.log('Lat: ' + coordinates[0].lat + ' long: ' + coordinates[0].lng);
+          
+          reply("TODO: implement forecast.").code(200);
+        });
+      }, function(error) {
+        console.error('Error', error);
+        reply("Internal Server Error").code(500);
+      })
     }
   }
 })();
