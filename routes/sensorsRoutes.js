@@ -4,6 +4,7 @@ var sensorsController = require('../controllers/sensorsController');
 var sensorsValidate = require('../validate/sensorsValidate');
 var sensorsModel = require('../models/sensorsModel');
 var sensorGetDataModel = require('../models/sensorGetDataModel');
+var forecastModel = require('../models/sensorsModel');
 var joi = require('joi');
 
 module.exports = function() {
@@ -12,21 +13,48 @@ module.exports = function() {
       method: 'GET',
       path: '/sensors/{thingy_id}/yesterdayDiff',
       config: {
-        tags: ['api', 'sensors'],
-        description: 'Get a specific sensor data',
-        handler: sensorsController.getYesterdayDiff,
-        validate: sensorsValidate.getYesterdayDiff,
-        plugins: {'hapi-swagger': {responses: {
-          200: {
-            description: 'Success',
-            schema: joi.array().items(new sensorGetDataModel().schema)
-          },
-          404: {
-            description: 'Sensor data  not available'
+          tags: ['api', 'sensors'],
+          description: 'Get yesterday sensor data',
+          handler: sensorsController.getYesterdayDiff,
+          validate: sensorsValidate.getYesterdayDiff,
+          plugins: {
+              'hapi-swagger': {
+                  responses: {
+                      200: {
+                          description: 'Success',
+                          schema: joi.array().items(new sensorGetDataModel().schema)
+                      },
+                      404: {
+                          description: 'Sensor data  not available'
+                      }
+                  }
+              }
           }
-        }}}
       }
       },
+      {
+        method: 'GET',
+        path: '/sensors/{country}/{city}/{time}',
+        config: {
+            tags: ['api', 'sensors'],
+            description: 'Get a forecast data',
+            handler: sensorsController.getForecast,
+            validate: sensorsValidate.getForecast,
+            plugins: {
+                'hapi-swagger': {
+                    responses: {
+                        200: {
+                            description: 'Success',
+                            schema: joi.array().items(new forecastModel().schema)
+                        },
+                        404: {
+                            description: 'Forecast data not available'
+                        }
+                    }
+                }
+            }
+        }
+        },
     {
         method: 'GET',
         path: '/sensors/{thingy_id}',
@@ -77,16 +105,16 @@ module.exports = function() {
             //TODO: get from Server Config by Thingy ID
             var setup = {
                 temperature: {
-                    interval: 5000
+                    interval: 50000
                 },
                 pressure: {
-                    interval: 5000
+                    interval: 50000
                 },
                 humidity: {
-                    interval: 5000
+                    interval: 50000
                 },
                 color: {
-                    interval: 5000
+                    interval: 50000
                 },
                 gas: {
                     mode: 1

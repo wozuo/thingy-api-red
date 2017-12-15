@@ -4,6 +4,7 @@ var joi = require('joi');
 
 var SensorsModel = require('../models/sensorsModel');
 var SensorGetDataModel = require('../models/sensorGetDataModel');
+var forecastModel = require('../models/forecastModel');
 
 function SensorsValidate() { };
 SensorsValidate.prototype = (function () {
@@ -21,6 +22,16 @@ SensorsValidate.prototype = (function () {
                 var sensorSchema = new SensorGetDataModel().schema;
                 return {
                     thingy_id: sensorSchema.thingy_id.required()
+                };
+            })()
+        },
+        getForecast: {
+            params: (function path() {
+                var forecastSchema = new forecastModel().schema;
+                return {
+                    country: forecastSchema.country.required(),
+                    city: forecastSchema.city.required(),
+                    time: forecastSchema.time.required()
                 };
             })()
         },
