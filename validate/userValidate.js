@@ -15,14 +15,6 @@ UserValidate.prototype = (function() {
         };
       })()
     },
-    createUser: {
-      payload: (function path() {
-        var userSchema = new UserModel().schema;
-        return {
-          username: userSchema.username.required()
-        };
-      })()
-    },
     editUser: {
       params: (function path() {
         var userSchema = new UserModel().schema;
@@ -33,9 +25,7 @@ UserValidate.prototype = (function() {
       payload: (function path() {
         var userSchema = new UserModel().schema;
         return {
-            username: userSchema.username.required(),
-            password_hash: userSchema.password_hash.required(),
-            access_tocken: userSchema.access_tocken.required()
+          username: userSchema.username.required()
         };
       })()
     },
