@@ -157,7 +157,7 @@ RecommendationController.prototype = (function() {
                           aocDesc: results[i].description
                         });
                       }
-                      if (highestHumidity >= 80) {
+                      if (highestHumidity >= 90) {
                         recommendations.push({
                           aocId: 5,
                           aocDesc: 'Raincoat (Rain)'
