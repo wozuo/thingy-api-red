@@ -10,6 +10,7 @@ const vision = require('vision');
 const db = require('./db');
 const authBearer = require('hapi-auth-bearer-token');
 const validateToken = require('./validate/validateToken');
+const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 
 const server = new hapi.Server();
 
@@ -86,6 +87,46 @@ server.register(
     for (var route in routes) {
       server.route(routes[route]);
     }
+    // Google Login Callback Route
+    server.route({
+      method: 'GET',
+      path: '/callback',
+      handler: function (request, reply) {
+        // For Google Login
+        if(request.query.code === undefined) {
+          console.log("Undefined")
+          reply()
+        } else {
+          console.log(request.query.code)
+          var url = 'https://www.googleapis.com/oauth2/v4/token?code=' + request.query.code + '&client_id=' + process.env.GOOGLE_CID + '&client_secret=' + process.env.GOOGLE_SECRET + '&redirect_uri=https://wicked-pumpkin-99140.herokuapp.com/callback&grant_type=authorization_code';
+          var req = new XMLHttpRequest();
+          req.open("POST", url, false);
+          req.send();
+          var result = JSON.parse(req.responseText);
+          reply(result)
+        }
+      }
+    });
+    // Google Login Refresh Token Route
+    server.route({
+      method: 'GET',
+      path: '/refresh',
+      handler: function (request, reply) {
+        // For Google Login
+        if(request.query.refresh_token === undefined) {
+          console.log("Undefined")
+          reply("No Refresh Token Provided")
+        } else {
+          console.log(request.query.refresh_token)
+          var url = 'https://www.googleapis.com/oauth2/v4/token?client_id=' + process.env.GOOGLE_CID + '&client_secret=' + process.env.GOOGLE_SECRET + '&refresh_token=' + request.query.refresh_token + '&grant_type=refresh_token';
+          var req = new XMLHttpRequest();
+          req.open("POST", url, false);
+          req.send();
+          var result = JSON.parse(req.responseText);
+          reply(result)
+        }
+      }
+    });
   }
 );
 
