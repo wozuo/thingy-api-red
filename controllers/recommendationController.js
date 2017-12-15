@@ -55,6 +55,9 @@ RecommendationController.prototype = (function() {
           }
         }
       })
+    },
+    getForecast: function getForecast(request, reply) {
+      reply("TODO: implement forecast").code(200);
     }
   }
 })();

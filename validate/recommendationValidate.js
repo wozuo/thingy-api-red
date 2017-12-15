@@ -14,6 +14,15 @@ RecommendationValidate.prototype = (function() {
           user_id: userSchema.userId.required()
         };
       })()
+    },
+    getForecast: {
+      params: (function path() {
+        var userSchema = new UserModel().schema;
+        return {
+          user_id: userSchema.userId.required(),
+          google_at: joi.string().required()
+        };
+      })()
     }
   }
 })();
