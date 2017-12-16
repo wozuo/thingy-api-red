@@ -4,7 +4,6 @@ var hapi = require('hapi');
 var https = require('https');
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 const db = require('../db');
-
 var Thingy_Temperature = 0;
 var Thingy_Pressure = 0;
 var Thingy_Humidity = 0;
@@ -214,13 +213,13 @@ UserController.prototype = (function () {
                 db.get().query(sql, function (error, results) {
                     if (error) {
                         console.log('Error executing query: ' + error.stack);
-                        reply('sensor data  not found').code(404);
+                        reply(sql + ' sensor1 data  not found' + error.stack).code(404);
                     } else {
                         inserted_id = results.insertId;
                         db.get().query('SELECT * FROM thingy_data WHERE td_id = ?', results.insertId, function (error, results) {
                             if (error) {
                                 console.log('sensor data not found. Error: ' + error)
-                                reply('sensor data not found.').code(404);
+                                reply(sql + ' sensor2 data not found.  ' + error).code(404);
                             } else {
                                 if (results.length == 1) {
                                     var result = {
@@ -239,7 +238,7 @@ UserController.prototype = (function () {
                                     };                                   
                                     reply(result).code(201);
                                 } else {
-                                    reply('sensor data not found').code(404);
+                               reply(sql + ' sensor3 data not found ' + error.stack).code(404);
                                 }
                             }
                         })
