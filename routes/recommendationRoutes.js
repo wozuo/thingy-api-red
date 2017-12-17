@@ -42,7 +42,7 @@ module.exports = function() {
             schema: joi.array().items(new RecommendationModel().schema)
           },
           404: {
-            description: 'User or thingy data not found'
+            description: 'User, Calendar or Weather data not found'
           }
         }}}
       }
