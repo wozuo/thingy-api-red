@@ -205,7 +205,7 @@ UserController.prototype = (function () {
                 var Thingy_Gas_Json = transformResponseToJson(Thingy_Gas);
                 var Thingy_Color_Json = transformResponseToJson(Thingy_Color);
 
-                var sql = "INSERT INTO thingy_data (thingy_id,added_time,temperature,humidity,pressure,eco2,tvoc,red,green,blue,clear) VALUES ('" + thingyId + "', STR_TO_DATE('" + timestamp + "','%m-%d-%Y %h:%i:%s %p')," +
+                var sql = "INSERT INTO thingy_data (thingy_id,added_time,temperature,humidity,pressure,eco2,tvoc,red,green,blue,clear) VALUES ('" + thingyId + "', DATE_ADD('" + timestamp + "', INTERVAL 1 HOUR)," +
                     Thingy_Temperature + "," + Thingy_Humidity +
                     "," + Thingy_Pressure + ", " + Thingy_Gas_Json.sensors.gas.eco2 + ","
                     + Thingy_Gas_Json.sensors.gas.tvoc + "," + Thingy_Color_Json.sensors.color.red + "," + Thingy_Color_Json.sensors.color.green + ","
