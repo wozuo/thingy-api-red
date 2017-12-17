@@ -34,7 +34,7 @@ module.exports = function() {
                 console.log('Internal Server Error: ' + error)
                 reply('Internal Server Error:').code(500);
               } else {
-                reply('Please open the app back up to complete the login process. Access token info: ' + result);
+                reply('Please open the app back up to complete the login process.');
               }
             });
           }
