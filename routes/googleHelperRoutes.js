@@ -88,17 +88,18 @@ module.exports = function() {
                 };
                 reply(result);
               } else {
-                let access_token = results[0].access_token;
-                let refresh_token = results[0].refresh_token;
+                var result = {
+                  access_token: results[0].access_token,
+                  refresh_token: results[0].refresh_token
+                };
                 db.get().query('DELETE FROM tokens WHERE user_id = "' + request.query.user_id + '"', function (error) {
                   if (error) {
                     console.log('Internal Server Error: ' + error)
                     reply('Internal Server Error:').code(500);
                   } else {
-                    reply('Article of clothing deleted for user').code(204);
+                    reply(result);
                   }
                 })
-                reply(result);
               }
             }
           });
