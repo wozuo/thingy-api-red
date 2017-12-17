@@ -1,5 +1,6 @@
 'use strict';
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
+const db = require('../db');
 
 /*
   Routes for a workaround to get Google login working on the client.
