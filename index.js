@@ -10,7 +10,7 @@ const vision = require('vision');
 const db = require('./db');
 const authBearer = require('hapi-auth-bearer-token');
 const validateToken = require('./validate/validateToken');
-const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
+//const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 
 const server = new hapi.Server();
 
@@ -87,6 +87,7 @@ server.register(
     for (var route in routes) {
       server.route(routes[route]);
     }
+    /*
     // Google Login Callback Route
     server.route({
       method: 'GET',
@@ -127,6 +128,7 @@ server.register(
         }
       }
     });
+    */
   }
 );
 
