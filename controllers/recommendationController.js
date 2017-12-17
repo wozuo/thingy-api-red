@@ -95,9 +95,11 @@ RecommendationController.prototype = (function() {
         for(var i = 0; i < items.length; i++) {
           console.log('Item Location: ' + items[i].location);
           console.log('Item Event Time: ' + items[i].start.dateTime);
-          dateTimes.push(items[i].start.dateTime);
-          url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + items[i].location + '&key=' + process.env.GOOGLE_MAPS_API_KEY + '';
-          coordinatePromises.push(getRequest(url));
+          if(items[i].location !== undefined) {
+            dateTimes.push(items[i].start.dateTime);
+            url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + items[i].location + '&key=' + process.env.GOOGLE_MAPS_API_KEY + '';
+            coordinatePromises.push(getRequest(url));
+          }
         }
         Promise.all(coordinatePromises).then((results) => {
           let coordinates = [];
